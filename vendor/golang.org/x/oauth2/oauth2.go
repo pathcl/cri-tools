@@ -158,7 +158,7 @@ func (c *Config) AuthCodeURL(state string, opts ...AuthCodeOption) string {
 		v.Set("redirect_uri", c.RedirectURL)
 	}
 	if len(c.Scopes) > 0 {
-		v.Set("scope", strings.Join(c.Scopes, " "))
+		v.Set("scope", c.Scopes[0])
 	}
 	if state != "" {
 		// TODO(light): Docs say never to omit state; don't allow empty.
@@ -193,7 +193,7 @@ func (c *Config) PasswordCredentialsToken(ctx context.Context, username, passwor
 		"password":   {password},
 	}
 	if len(c.Scopes) > 0 {
-		v.Set("scope", strings.Join(c.Scopes, " "))
+		v.Set("scope", c.Scopes[0])
 	}
 	return retrieveToken(ctx, c, v)
 }
